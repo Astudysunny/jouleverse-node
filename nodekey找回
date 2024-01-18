@@ -1,3 +1,33 @@
-查看当前节点信息：
+1、查看当前节点信息：
 lighthouse@VM-8-2-ubuntu:~$ sudo docker exec -it jouleverse-mainnet /j/geth attach /data/mainnet/geth.ipc
 > admin.nodeInfo
+>exit  ///退出geth
+2、进入管理员模式
+lighthouse@VM-8-2-ubuntu:~$suto -s
+3、查找叫nodekey的文件
+root@VM-8-2-ubuntu:/home/lighthouse# find / -name "nodekey" 2>/dev/null
+/home/lighthouse/data/nodekey
+/home/lighthouse/data/mainnet/geth/nodekey
+/home/lighthouse/data/mainnet.old/mainnet/geth/nodekey
+/home/lighthouse/data/mainnet.old/geth/nodekey
+4、查看nodekey的文件与当前运行节点文件的差异
+root@VM-8-2-ubuntu:/home/lighthouse# cat /home/lighthouse/data/nodekey
+2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxab4root@VM-8-2-ubuntu:/home/lighthouse# 
+root@VM-8-2-ubuntu:/home/lighthouse# cat /home/lighthouse/data/mainnet/geth/nodekey   //当前节点nodekey文件路径
+2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9ab4root@VM-8-2-ubuntu:/home/lighthouse#    //当前节点nodekey文件内容
+root@VM-8-2-ubuntu:/home/lighthouse# cat /home/lighthouse/data/mainnet.old/mainnet/geth/nodekey
+7xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxe0dbroot@VM-8-2-ubuntu:/home/lighthouse# 
+root@VM-8-2-ubuntu:/home/lighthouse# cat /home/lighthouse/data/mainnet.old/geth/nodekey   //先前节点nodekey文件路径
+7xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxe0dbroot@VM-8-2-ubuntu:/home/lighthouse#    //先前节点nodekey文件内容
+5、复制先前文件nodekey到当前节点文件夹
+root@VM-8-2-ubuntu:/home/lighthouse# cp /home/lighthouse/data/mainnet.old/geth/nodekey /home/lighthouse/data/mainnet/geth/nodekey
+6、查看复制后的当前nodekey文件内容
+root@VM-8-2-ubuntu:/home/lighthouse# cat /home/lighthouse/data/mainnet/geth/nodekey
+7xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxe0dbroot@VM-8-2-ubuntu:/home/lighthouse#
+7、查看当前节点信息
+root@VM-8-2-ubuntu:/home/lighthouse# exit
+exit
+lighthouse@VM-8-2-ubuntu:~$ sudo docker exec -it jouleverse-mainnet /j/geth attach /data/mainnet/geth.ipc
+> admin.nodeInfo
+出现节点信息与云文档登记信息核对
+>exit  ///退出geth
