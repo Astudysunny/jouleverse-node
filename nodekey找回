@@ -1,0 +1,3 @@
+查看当前节点信息：
+lighthouse@VM-8-2-ubuntu:~$ sudo docker exec -it jouleverse-mainnet /j/geth attach /data/mainnet/geth.ipc
+> admin.nodeInfo
